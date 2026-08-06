@@ -81,8 +81,9 @@ h1.hero-title .grad{background:linear-gradient(90deg,var(--or1),var(--or4));-web
 .pcard:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.4);}
 .pcard.featured{border-color:rgba(255,100,50,.35);box-shadow:0 0 0 1px rgba(255,100,50,.15);}
 /* Banner — pointer-events:none on image AND overlay so nothing captures tap */
-.pcard-banner-wrap{position:relative;overflow:hidden;line-height:0;border-radius:16px 16px 0 0;}
-.pcard-banner{width:100%;height:160px;object-fit:cover;display:block;pointer-events:none;user-select:none;-webkit-user-drag:none;border-radius:16px 16px 0 0;}
+.pcard-banner-wrap{position:relative;overflow:hidden;line-height:0;border-radius:16px 16px 0 0;height:160px;background:#000;}
+.pcard-banner-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(22px) brightness(.5) saturate(1.3);transform:scale(1.15);}
+.pcard-banner{position:relative;width:100%;height:160px;object-fit:contain;display:block;pointer-events:none;user-select:none;-webkit-user-drag:none;z-index:1;}
 .pcard-banner-overlay{position:absolute;inset:0;z-index:2;pointer-events:none;}
 .card-badge{position:absolute;top:12px;right:12px;z-index:3;background:linear-gradient(135deg,var(--or1),var(--or3));color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:999px;pointer-events:none;}
 .pcard-body{padding:20px;display:flex;flex-direction:column;flex:1;}
@@ -112,7 +113,9 @@ h1.hero-title .grad{background:linear-gradient(90deg,var(--or1),var(--or4));-web
 .detail-wrap{max-width:800px;margin:0 auto;padding:80px 20px 80px;}
 .detail-back{display:inline-flex;align-items:center;gap:7px;color:rgba(255,255,255,.5);font-size:.82rem;cursor:pointer;margin-bottom:28px;background:none;border:none;font-family:var(--font-body);-webkit-tap-highlight-color:transparent;transition:color .2s;}
 .detail-back:hover{color:#fff;}
-.detail-banner{width:100%;max-height:340px;object-fit:cover;border-radius:16px;display:block;pointer-events:none;user-select:none;margin-bottom:28px;border:1px solid var(--border);}
+.detail-banner-wrap{position:relative;overflow:hidden;border-radius:16px;margin-bottom:28px;border:1px solid var(--border);background:#000;height:min(340px,60vw);}
+.detail-banner-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(28px) brightness(.5) saturate(1.3);transform:scale(1.15);}
+.detail-banner{position:relative;width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;user-select:none;z-index:1;}
 .detail-tag{display:inline-block;font-size:.65rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;border-radius:999px;margin-bottom:14px;}
 .detail-name{font-family:var(--font-head);font-size:clamp(1.6rem,5vw,2.4rem);font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:14px;}
 .detail-desc{font-size:.95rem;color:rgba(255,255,255,.6);line-height:1.8;margin-bottom:28px;}
@@ -128,6 +131,53 @@ h1.hero-title .grad{background:linear-gradient(90deg,var(--or1),var(--or4));-web
 .detail-btns.single{grid-template-columns:1fr;}
 .detail-badge{display:inline-block;background:linear-gradient(135deg,var(--or1),var(--or3));color:#fff;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:999px;margin-bottom:16px;}
 @media(max-width:480px){.detail-btns{grid-template-columns:1fr;}}
+
+/* CONVERSION ELEMENTS — product detail page */
+.detail-rating-row{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.detail-rating-stars{color:#FFBA08;font-size:.95rem;letter-spacing:1px;}
+.detail-rating-text{font-size:.8rem;color:rgba(255,255,255,.55);}
+.detail-rating-text b{color:#fff;}
+
+.trust-strip{display:flex;gap:10px;overflow-x:auto;margin-bottom:24px;padding-bottom:2px;scrollbar-width:none;}
+.trust-strip::-webkit-scrollbar{display:none;}
+.trust-chip{flex-shrink:0;display:flex;align-items:center;gap:7px;background:var(--dark3);border:1px solid var(--border);border-radius:10px;padding:8px 13px;font-size:.74rem;color:rgba(255,255,255,.75);white-space:nowrap;}
+.trust-chip .ic{font-size:.95rem;}
+
+.countdown-bar{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(255,69,0,.14),rgba(255,140,66,.06));border:1px solid rgba(255,100,50,.3);border-radius:12px;padding:12px 16px;margin-bottom:20px;}
+.countdown-label{font-size:.76rem;color:var(--or3);font-weight:600;display:flex;align-items:center;gap:6px;}
+.countdown-clock{display:flex;gap:6px;margin-left:auto;}
+.countdown-clock .cbox{background:var(--dark);border:1px solid rgba(255,100,50,.3);border-radius:7px;padding:5px 8px;font-family:var(--font-head);font-size:.9rem;font-weight:700;color:#fff;min-width:34px;text-align:center;}
+.countdown-clock .csep{color:var(--or3);font-weight:700;align-self:center;}
+
+.guarantee-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:28px;}
+.guarantee-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;background:var(--dark3);border:1px solid var(--border);border-radius:12px;padding:16px 10px;}
+.guarantee-item .gi{font-size:1.4rem;}
+.guarantee-item span{font-size:.72rem;color:rgba(255,255,255,.65);line-height:1.4;font-weight:500;}
+
+.detail-testimonial{background:var(--dark3);border:1px solid var(--border);border-left:3px solid var(--or2);border-radius:12px;padding:18px 20px;margin-bottom:28px;}
+.detail-testimonial .tq{font-size:.88rem;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:10px;font-style:italic;}
+.detail-testimonial .ta{display:flex;align-items:center;gap:8px;font-size:.78rem;color:rgba(255,255,255,.5);}
+.detail-testimonial .ta b{color:#fff;font-weight:600;}
+.detail-testimonial .stars-sm{color:#FFBA08;font-size:.75rem;letter-spacing:1px;}
+
+.faq-section{margin-bottom:28px;}
+.faq-section h4{font-family:var(--font-head);font-size:.82rem;font-weight:700;color:var(--or3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;}
+.faq-item{background:var(--dark3);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;overflow:hidden;}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;cursor:pointer;font-size:.86rem;font-weight:600;color:#fff;-webkit-tap-highlight-color:transparent;}
+.faq-q .arrow{transition:transform .2s;color:var(--or3);flex-shrink:0;}
+.faq-item.open .faq-q .arrow{transform:rotate(180deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+.faq-item.open .faq-a{max-height:220px;}
+.faq-a p{padding:0 16px 14px;font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.7;}
+
+.sticky-buybar{position:fixed;left:0;right:0;bottom:-100px;z-index:90;background:rgba(13,13,13,0.92);backdrop-filter:blur(16px);border-top:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;gap:12px;transition:bottom .25s ease;}
+.sticky-buybar.show{bottom:0;}
+.sticky-buybar .sb-info{flex:1;min-width:0;}
+.sticky-buybar .sb-name{font-size:.76rem;color:rgba(255,255,255,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sticky-buybar .sb-price{font-family:var(--font-head);font-size:1.15rem;font-weight:700;color:#fff;}
+.sticky-buybar .sb-price .orig{font-size:.72rem;color:var(--muted);text-decoration:line-through;font-weight:400;margin-left:6px;}
+.sticky-buybar .btn{flex-shrink:0;padding:11px 20px;}
+@media(min-width:820px){.sticky-buybar{display:none;}}
 
 /* FOOTER */
 .site-footer{border-top:1px solid var(--border);background:var(--dark2);padding:48px 20px;}
@@ -204,6 +254,40 @@ h1.hero-title .grad{background:linear-gradient(90deg,var(--or1),var(--or4));-web
 .toggle::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left .2s;}
 .toggle.on::after{left:20px;}
 .gh-status{font-size:.78rem;padding:6px 12px;border-radius:8px;margin-top:10px;display:none;}
+
+/* ADMIN POLISH — stat cards, thumbnails, checkboxes, dynamic list rows */
+.admin-stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-top:20px;}
+.admin-stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 14px;text-align:center;}
+.admin-stat-n{font-family:var(--font-head);font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--or2),var(--or4));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.admin-stat-l{font-size:.66rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;}
+.admin-section-sub{font-size:.78rem;color:var(--muted);margin:-10px 0 16px;}
+.pli-thumb{width:38px;height:38px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--dark4);}
+.pli-checkbox{width:17px;height:17px;flex-shrink:0;accent-color:var(--or2);cursor:pointer;}
+.pli-rank{font-family:var(--font-head);font-size:.72rem;font-weight:700;color:var(--muted);flex-shrink:0;width:28px;}
+.pli-move-btn{background:var(--dark4);border:1px solid var(--border);color:rgba(255,255,255,.6);width:26px;height:26px;border-radius:6px;font-size:.65rem;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.pli-move-btn:hover:not(:disabled){color:#fff;border-color:rgba(255,100,50,.35);}
+.pli-move-btn:disabled{opacity:.25;cursor:not-allowed;}
+.admin-list-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+.admin-bulk-btn{background:rgba(220,50,50,.12);color:#f87171;border:1px solid rgba(220,50,50,.25);font-family:var(--font-body);font-size:.78rem;font-weight:600;padding:7px 14px;border-radius:8px;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent;}
+.admin-bulk-btn:hover{background:rgba(220,50,50,.22);}
+.admin-bulk-btn:disabled{opacity:.4;cursor:not-allowed;}
+.select-all-row{display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--muted);}
+.dyn-row{display:flex;align-items:center;gap:8px;background:var(--dark3);border-radius:9px;padding:8px 10px;margin-bottom:8px;}
+.dyn-row input,.dyn-row textarea{background:var(--dark);border:1px solid var(--border);color:#fff;font-family:var(--font-body);font-size:.82rem;padding:7px 10px;border-radius:7px;outline:none;}
+.dyn-row .dyn-icon{width:44px;text-align:center;flex-shrink:0;}
+.dyn-row .dyn-text{flex:1;min-width:0;}
+.dyn-row .dyn-remove{flex-shrink:0;background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-size:.95rem;padding:4px 6px;-webkit-tap-highlight-color:transparent;}
+.dyn-row .dyn-remove:hover{color:#f87171;}
+.dyn-faq-row{flex-direction:column;align-items:stretch;gap:6px;}
+.dyn-faq-row .dyn-faq-top{display:flex;gap:8px;align-items:center;}
+.admin-collapse{border:1px solid var(--border);border-radius:12px;margin-top:18px;overflow:hidden;}
+.admin-collapse-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;cursor:pointer;background:var(--dark3);font-size:.85rem;font-weight:600;color:#fff;-webkit-tap-highlight-color:transparent;}
+.admin-collapse-head .arrow{transition:transform .2s;color:var(--or3);}
+.admin-collapse.open .admin-collapse-head .arrow{transform:rotate(180deg);}
+.admin-collapse-body{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.admin-collapse.open .admin-collapse-body{max-height:2400px;}
+.admin-collapse-inner{padding:18px 16px;}
+.admin-hint{font-size:.72rem;color:var(--muted);margin-top:-4px;margin-bottom:10px;line-height:1.5;}
 .gh-ok{background:rgba(100,220,120,.1);color:#6ddc7a;display:block;}
 .gh-err{background:rgba(220,50,50,.1);color:#f87171;display:block;}
 
@@ -614,6 +698,7 @@ h1.hero-title .grad{background:linear-gradient(90deg,var(--or1),var(--or4));-web
   <div class="admin-wrap">
     <div class="admin-title">Admin <span>Panel</span></div>
     <p style="font-size:.82rem;color:var(--muted);margin-top:4px;">Target1st Product Manager</p>
+    <div class="admin-stats-row" id="admin-stats-row"></div>
     <div class="admin-section">
       <div class="admin-section-title">🔑 GitHub Config</div>
       <div class="admin-grid">
@@ -636,7 +721,31 @@ h1.hero-title .grad{background:linear-gradient(90deg,var(--or1),var(--or4));-web
       </div>
     </div>
     <div class="admin-section">
+      <div class="admin-section-title">🎯 Conversion & Trust Settings <span style="font-size:.68rem;color:var(--muted);font-weight:500;text-transform:none;letter-spacing:0;">(shown on every product page, unless overridden per-product below)</span></div>
+      <div class="admin-grid" style="margin-bottom:18px;">
+        <div class="af-group"><label>Default Rating</label><input type="number" id="ss-rating" min="1" max="5" step="0.1" value="4.8"></div>
+        <div class="af-group"><label>Default Rating Count Label</label><input type="text" id="ss-rating-count" placeholder="250+"></div>
+      </div>
+      <p style="font-size:.78rem;font-weight:600;color:#fff;margin-bottom:8px;">Trust strip chips (icons row under product title)</p>
+      <div id="trust-chips-list"></div>
+      <button class="admin-btn admin-btn-ghost" style="margin-bottom:18px;" onclick="addTrustChip()">+ Add Chip</button>
+      <p style="font-size:.78rem;font-weight:600;color:#fff;margin-bottom:8px;">Guarantee row (icons below the Buy button)</p>
+      <div id="guarantee-items-list"></div>
+      <button class="admin-btn admin-btn-ghost" style="margin-bottom:18px;" onclick="addGuaranteeItem()">+ Add Item</button>
+      <p style="font-size:.78rem;font-weight:600;color:#fff;margin-bottom:8px;">Default FAQ (used when a product doesn't have its own custom FAQ)</p>
+      <div id="default-faq-list"></div>
+      <button class="admin-btn admin-btn-ghost" onclick="addDefaultFaq()">+ Add Question</button>
+      <div style="margin-top:18px;">
+        <button class="admin-btn admin-btn-primary" onclick="saveSiteSettingsFromForm();pushToGitHub();">💾 Save Settings & Push to GitHub</button>
+      </div>
+    </div>
+    <div class="admin-section">
       <div class="admin-section-title">📦 Products</div>
+      <p class="admin-hint">Use ▲▼ to set the display order (rank #1 shows first). Featured products always group above non-featured ones — mark a product Featured too if you want it at the very top overall.</p>
+      <div class="admin-list-header">
+        <label class="select-all-row"><input type="checkbox" class="pli-checkbox" id="pli-select-all" onchange="toggleSelectAllProducts(this.checked)"> Select all</label>
+        <button class="admin-bulk-btn" id="bulk-delete-btn" disabled onclick="deleteSelectedProducts()">🗑️ Delete Selected (0)</button>
+      </div>
       <div id="admin-product-list"></div>
       <button class="admin-btn admin-btn-primary" style="margin-top:14px;" onclick="openAddForm()">+ Add New Product</button>
     </div>
@@ -663,6 +772,36 @@ h1.hero-title .grad{background:linear-gradient(90deg,var(--or1),var(--or4));-web
         <div class="af-group full"><label>Categories (comma-separated IDs)</label><input type="text" id="f-cats" placeholder="home,reasoning,banking"></div>
         <div class="af-group"><label>Featured?</label><div class="toggle-row"><div class="toggle" id="toggle-featured" onclick="toggleFeature('toggle-featured')"></div><span id="toggle-featured-label" style="font-size:.8rem;color:var(--muted);">No</span></div></div>
       </div>
+
+      <div class="admin-collapse" id="conv-boost-collapse">
+        <div class="admin-collapse-head" onclick="document.getElementById('conv-boost-collapse').classList.toggle('open')">
+          🚀 Conversion Boost (optional — leave blank to use site defaults) <span class="arrow">▾</span>
+        </div>
+        <div class="admin-collapse-body"><div class="admin-collapse-inner">
+          <div class="admin-grid">
+            <div class="af-group"><label>Rating Override</label><input type="number" id="f-rating" min="1" max="5" step="0.1" placeholder="e.g. 4.9"></div>
+            <div class="af-group"><label>Rating Count Override</label><input type="text" id="f-rating-count" placeholder="e.g. 340+"></div>
+          </div>
+          <div class="af-group" style="margin-bottom:14px;">
+            <label>Sale Countdown Ends At</label>
+            <input type="datetime-local" id="f-sale-ends">
+            <p class="admin-hint">Leave blank and the countdown will just reset every midnight automatically. Set this for a real one-time deadline.</p>
+          </div>
+          <p style="font-size:.78rem;font-weight:600;color:#fff;margin-bottom:8px;">Custom Testimonial (leave blank to show a random site review)</p>
+          <div class="admin-grid" style="margin-bottom:10px;">
+            <div class="af-group"><label>Name</label><input type="text" id="f-test-name" placeholder="e.g. Rohit Kumar"></div>
+            <div class="af-group"><label>Exam</label><input type="text" id="f-test-exam" placeholder="e.g. SSC CGL 2025"></div>
+            <div class="af-group"><label>Stars (1-5)</label><input type="number" id="f-test-stars" min="1" max="5" placeholder="5"></div>
+          </div>
+          <div class="af-group" style="margin-bottom:14px;"><label>Testimonial Text</label><textarea id="f-test-text" rows="2" placeholder="What the student said..."></textarea></div>
+          <div class="af-group">
+            <label>Custom FAQ (leave blank to use the site default FAQ)</label>
+            <textarea id="f-faq" rows="4" placeholder="Question one? :: Answer one&#10;Question two? :: Answer two"></textarea>
+            <p class="admin-hint">One per line, format: Question :: Answer</p>
+          </div>
+        </div></div>
+      </div>
+
       <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;">
         <button class="admin-btn admin-btn-primary" onclick="saveProduct()">💾 Save & Push to GitHub</button>
         <button class="admin-btn admin-btn-ghost" onclick="cancelForm()">Cancel</button>
@@ -801,6 +940,33 @@ let editingId      = null;
 let pendingCheckout = {};
 let currentView    = "home";
 
+// ── SITE-WIDE CONVERSION / TRUST SETTINGS ─────────────────────
+// Editable from Admin Panel → "Conversion & Trust Settings". Pushed to
+// GitHub as the `settings` key in products.json, alongside products/categories.
+let siteSettings = {
+  defaultRating: 4.8,
+  defaultRatingCount: '250+',
+  trustChips: [
+    {icon:'🔒', text:'Secure Razorpay Checkout'},
+    {icon:'📧', text:'Instant Email Delivery'},
+    {icon:'🎓', text:'10,000+ Students Helped'},
+    {icon:'✅', text:'Verified Study Material'}
+  ],
+  guaranteeItems: [
+    {icon:'🔒', text:'Secure Payment'},
+    {icon:'📧', text:'Instant Email Delivery'},
+    {icon:'✅', text:'Verified & Exam-Focused'},
+    {icon:'💬', text:'Doubt Support on Telegram'}
+  ],
+  defaultFaq: [
+    { q: 'How will I receive the file after payment?', a: 'Instantly on your registered email address as soon as payment is confirmed — usually within a minute.' },
+    { q: 'Is this a one-time payment?', a: "Yes, it's a single one-time payment. No subscription, no hidden charges." },
+    { q: "What if I don't receive the file or face an issue?", a: "Message us on Telegram (@Target1stsupport) with your payment details and we'll resolve it right away." },
+    { q: 'Can I access this on my phone?', a: 'Yes, all our material is in PDF format and works on any phone, tablet, or laptop.' },
+    { q: 'Is there a refund policy?', a: 'Please check our Refund Policy page — as digital products, most sales are final, but we always help if something genuinely went wrong on our end.' }
+  ]
+};
+
 // ── TOAST ────────────────────────────────────────────────────
 let _toastTimer = null;
 function showToast(msg, type) {
@@ -814,7 +980,7 @@ function showToast(msg, type) {
                        : 'var(--border)';
   el.classList.add('show');
   clearTimeout(_toastTimer);
-  _toastTimer = setTimeout(() => el.classList.remove('show'), 2800);
+  _toastTimer = setTimeout(() => el.classList.remove('show'), type === 'error' ? 6500 : 2800);
 }
 
 
@@ -835,6 +1001,12 @@ function showView(name) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   const target = document.getElementById('view-' + name);
   if (!target) return;
+  if (name !== 'product') {
+    if (typeof _countdownInterval !== 'undefined' && _countdownInterval) { clearInterval(_countdownInterval); _countdownInterval = null; }
+    if (typeof _stickyObserver !== 'undefined' && _stickyObserver) { _stickyObserver.disconnect(); _stickyObserver = null; }
+    const _bar = document.getElementById('sticky-buybar');
+    if (_bar) _bar.classList.remove('show');
+  }
   target.classList.add('active');
   // Move shared footer
   const _sf = document.getElementById('shared-footer');
@@ -882,7 +1054,9 @@ async function loadProducts() {
     } else {
       allProducts = data.products || [];
       if (data.categories && data.categories.length) allCategories = data.categories;
+      if (data.settings) siteSettings = Object.assign({}, siteSettings, data.settings);
     }
+    renderAdminSiteSettingsForm();
     renderFilterBar();
     // Update hero stats from real data
     const liveCount = allProducts.filter(p => p.status !== 'hidden').length;
@@ -945,7 +1119,7 @@ function buildCard(p) {
 
   const badgeHtml = p.badge ? `<div class="card-badge">${p.badge}</div>` : '';
   const bannerHtml = p.bannerUrl
-    ? `<div class="pcard-banner-wrap"><img src="${p.bannerUrl}" class="pcard-banner" alt="" draggable="false" loading="lazy"><div class="pcard-banner-overlay"></div></div>`
+    ? `<div class="pcard-banner-wrap"><img src="${p.bannerUrl}" class="pcard-banner-bg" alt="" draggable="false" loading="lazy"><img src="${p.bannerUrl}" class="pcard-banner" alt="" draggable="false" loading="lazy"><div class="pcard-banner-overlay"></div></div>`
     : '';
 
   const priceHtml = (p.status === 'free' || p.price === 0)
@@ -1010,7 +1184,79 @@ function buildCard(p) {
 
 // renderProducts defined below
 
-// ── PRODUCT DETAIL PAGE ──────────────────────────────────────
+// ── PRODUCT DETAIL PAGE — CONVERSION HELPERS ─────────────────
+// Trust chips, guarantee row, default rating & FAQ now live in siteSettings
+// (edit via Admin Panel → Conversion & Trust Settings). Per-product overrides:
+//   rating, ratingCount, saleEndsAt (ISO string), testimonial {name,exam,stars,text}, faq [{q,a}]
+let _countdownInterval = null;
+let _stickyObserver = null;
+
+function toggleFaq(id) {
+  const el = document.getElementById('faq-' + id);
+  if (el) el.classList.toggle('open');
+}
+
+function startCountdown(p) {
+  if (_countdownInterval) clearInterval(_countdownInterval);
+  function getDeadline() {
+    if (p.saleEndsAt) {
+      const d = new Date(p.saleEndsAt);
+      if (!isNaN(d.getTime()) && d.getTime() > Date.now()) return d;
+    }
+    // No valid future saleEndsAt set → fall back to "resets at midnight" so the
+    // clock is always counting down to something real, never a fake frozen timer.
+    const d = new Date();
+    d.setHours(24, 0, 0, 0);
+    return d;
+  }
+  function tick() {
+    const eh = document.getElementById('cd-h'), em = document.getElementById('cd-m'), es = document.getElementById('cd-s');
+    if (!eh) { clearInterval(_countdownInterval); return; }
+    const diff = Math.max(0, getDeadline() - new Date());
+    const h = Math.floor(diff / 3600000), m = Math.floor((diff % 3600000) / 60000), s = Math.floor((diff % 60000) / 1000);
+    eh.textContent = String(h).padStart(2, '0');
+    em.textContent = String(m).padStart(2, '0');
+    es.textContent = String(s).padStart(2, '0');
+  }
+  tick();
+  _countdownInterval = setInterval(tick, 1000);
+}
+
+function setupStickyBuyBar(p, safeBuy, safeName, paise) {
+  let bar = document.getElementById('sticky-buybar');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.id = 'sticky-buybar';
+    bar.className = 'sticky-buybar';
+    document.body.appendChild(bar);
+  }
+  if (p.status === 'coming_soon') { bar.classList.remove('show'); bar.innerHTML = ''; return; }
+
+  const priceSm = (p.status === 'free' || p.price === 0)
+    ? `<div class="sb-price" style="color:var(--or3);">Free</div>`
+    : `<div class="sb-price">₹${p.price}<span class="orig">₹${p.originalPrice}</span></div>`;
+
+  let ctaBtn = '';
+  if (p.status === 'free' || p.price === 0) {
+    if (p.externalLink) ctaBtn = `<a href="${p.externalLink}" target="_blank" class="btn btn-free">Access Free →</a>`;
+    else if (p.driveLink) ctaBtn = `<button class="btn btn-free" onclick="openFreeModal('${safeBuy}','${safeName}')">Get Free</button>`;
+    else return;
+  } else {
+    ctaBtn = `<button class="btn btn-primary" onclick="openBuyModal('${safeBuy}','${safeName}',${paise})">Buy Now</button>`;
+  }
+
+  bar.innerHTML = `<div class="sb-info"><div class="sb-name">${p.name}</div>${priceSm}</div>${ctaBtn}`;
+
+  if (_stickyObserver) _stickyObserver.disconnect();
+  const anchor = document.getElementById('main-buy-anchor');
+  if (anchor && 'IntersectionObserver' in window) {
+    _stickyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => bar.classList.toggle('show', !e.isIntersecting && e.boundingClientRect.top < 0));
+    }, { threshold: 0 });
+    _stickyObserver.observe(anchor);
+  }
+}
+
 function _openProductDetailCore(p) {
 
   const isDark = ['dark-navy','dark-red','dark-green'].includes(p.theme);
@@ -1025,17 +1271,40 @@ function _openProductDetailCore(p) {
   const paise    = Math.round((p.price||0) * 100);
 
   const bannerHtml = p.bannerUrl
-    ? `<img src="${p.bannerUrl}" class="detail-banner" alt="${p.name}" loading="lazy">`
+    ? `<div class="detail-banner-wrap"><img src="${p.bannerUrl}" class="detail-banner-bg" alt="" loading="lazy"><img src="${p.bannerUrl}" class="detail-banner" alt="${p.name}" loading="lazy"></div>`
     : '';
 
   const badgeHtml = p.badge
     ? `<div class="detail-badge">${p.badge}</div><br>` : '';
+
+  const isPaid = !(p.status === 'free' || p.price === 0 || p.status === 'coming_soon');
+
+  const rating = p.rating || siteSettings.defaultRating;
+  const ratingCount = p.ratingCount || siteSettings.defaultRatingCount;
+  const fullStars = Math.round(rating);
+  const ratingHtml = `<div class="detail-rating-row">
+    <span class="detail-rating-stars">${'★'.repeat(fullStars)}${'☆'.repeat(5 - fullStars)}</span>
+    <span class="detail-rating-text"><b>${rating}</b>/5 · ${ratingCount} students</span>
+  </div>`;
+
+  const trustStripHtml = `<div class="trust-strip">
+    ${siteSettings.trustChips.map(c => `<div class="trust-chip"><span class="ic">${c.icon}</span> ${c.text}</div>`).join('')}
+  </div>`;
 
   const priceHtml = (p.status === 'free' || p.price === 0)
     ? `<div class="detail-price" style="color:var(--or3);">Free</div>`
     : `<div class="detail-price">₹${p.price}</div>
        <div class="detail-orig">₹${p.originalPrice}</div>
        <div class="detail-off">${p.discount}</div>`;
+
+  const countdownHtml = (isPaid && p.originalPrice) ? `<div class="countdown-bar">
+      <span class="countdown-label">⏰ Offer ends in</span>
+      <div class="countdown-clock">
+        <span class="cbox" id="cd-h">--</span><span class="csep">:</span>
+        <span class="cbox" id="cd-m">--</span><span class="csep">:</span>
+        <span class="cbox" id="cd-s">--</span>
+      </div>
+    </div>` : '';
 
   let btns = '';
   if (p.status === 'coming_soon') {
@@ -1066,6 +1335,26 @@ function _openProductDetailCore(p) {
 
   const cardBg = isDark ? `style="${bgStyle}border-radius:16px;padding:24px;border:1px solid var(--border);margin-bottom:28px;"` : '';
 
+  const guaranteeHtml = `<div class="guarantee-row">
+    ${siteSettings.guaranteeItems.map(g => `<div class="guarantee-item"><span class="gi">${g.icon}</span><span>${g.text}</span></div>`).join('')}
+  </div>`;
+
+  const tItem = p.testimonial || (reviews.length ? reviews[Math.floor(Math.random() * reviews.length)] : null);
+  const testimonialHtml = tItem ? `<div class="detail-testimonial">
+    <div class="tq">"${tItem.text}"</div>
+    <div class="ta"><span class="stars-sm">${'★'.repeat(tItem.stars || 5)}</span><b>${tItem.name}</b> · ${tItem.exam || ''}</div>
+  </div>` : '';
+
+  const faqList = (p.faq && p.faq.length) ? p.faq : siteSettings.defaultFaq;
+  const faqHtml = `<div class="faq-section">
+    <h4>Frequently Asked Questions</h4>
+    ${faqList.map((f, i) => `
+      <div class="faq-item" id="faq-${p.id}-${i}">
+        <div class="faq-q" onclick="toggleFaq('${p.id}-${i}')">${f.q}<span class="arrow">▾</span></div>
+        <div class="faq-a"><p>${f.a}</p></div>
+      </div>`).join('')}
+  </div>`;
+
   const waMsg = encodeURIComponent(`🎯 Hey! Check out this study material for your exam prep:\n\n📚 *${p.name}*\n💰 Only ₹${p.price}\n\n👉 ${window.location.origin}${window.location.pathname}#products/${p.id}\n\nFrom Target1st — India's Academic Prep Store 🇮🇳`);
   const waBtn = `<a href="https://wa.me/?text=${waMsg}" target="_blank" class="wa-share-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Share on WhatsApp</a>`;
 
@@ -1079,22 +1368,31 @@ function _openProductDetailCore(p) {
       ${badgeHtml}
       <span class="detail-tag" style="background:${p.tagBg||'rgba(255,69,0,.1)'};color:${p.tagColor||'var(--or3)'};">${p.tag||'Product'}</span>
       <div class="detail-name">${p.name}</div>
+      ${ratingHtml}
+      ${trustStripHtml}
       <div class="detail-desc">${p.description}</div>
       <div class="detail-features">
         <h4>What's included</h4>
         <ul>${featuresHtml}</ul>
       </div>
+      ${countdownHtml}
       <div class="detail-price-row">${priceHtml}</div>
-      ${btns}
+      <div id="main-buy-anchor">${btns}</div>
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:4px;">
         ${waBtn}
         <button class="btn btn-ghost" style="padding:10px 16px;font-size:.8rem;" onclick="addToCart('${p.id}')">🛒 Add to Cart</button>
       </div>
+      ${guaranteeHtml}
+      ${testimonialHtml}
+      ${faqHtml}
     </div>
   `;
 
   showView('product');
   document.title = p.name + ' — Target1st';
+
+  if (isPaid && p.originalPrice) startCountdown(p);
+  setupStickyBuyBar(p, safeBuy, safeName, paise);
 }
 
 // ── CHECKOUT MODAL ───────────────────────────────────────────
@@ -1167,8 +1465,12 @@ function checkAdminPass() {
   if (document.getElementById('admin-pass-input').value === ADMIN_PASSWORD) {
     document.getElementById('admin-login-modal').classList.remove('open');
     showView('admin');
+    loadGhConfig();
     renderAdminProductList();
     renderAdminCatList();
+    renderAdminSiteSettingsForm();
+    renderAdminStats();
+    checkAdminDraft();
     history.replaceState(null, '', window.location.pathname);
   } else {
     showToast('❌ Wrong password', 'error');
@@ -1205,11 +1507,13 @@ function addCategory() {
   document.getElementById('new-cat-id').value='';
   document.getElementById('new-cat-label').value='';
   renderAdminCatList();
+  markDirty();
   showToast('Added — push to GitHub to save');
 }
 function removeCat(id) {
   allCategories = allCategories.filter(c=>c.id!==id);
   renderAdminCatList();
+  markDirty();
   showToast('Removed — push to GitHub to save');
 }
 
@@ -1249,11 +1553,22 @@ function editProduct(idx) {
   const tog = document.getElementById('toggle-featured');
   tog.classList.toggle('on', !!p.featured);
   document.getElementById('toggle-featured-label').textContent = p.featured?'Yes':'No';
+  // Conversion boost fields
+  document.getElementById('f-rating').value       = p.rating || '';
+  document.getElementById('f-rating-count').value = p.ratingCount || '';
+  document.getElementById('f-sale-ends').value    = p.saleEndsAt ? p.saleEndsAt.slice(0,16) : '';
+  document.getElementById('f-test-name').value    = (p.testimonial && p.testimonial.name) || '';
+  document.getElementById('f-test-exam').value    = (p.testimonial && p.testimonial.exam) || '';
+  document.getElementById('f-test-stars').value   = (p.testimonial && p.testimonial.stars) || '';
+  document.getElementById('f-test-text').value    = (p.testimonial && p.testimonial.text) || '';
+  document.getElementById('f-faq').value = (p.faq && p.faq.length) ? p.faq.map(f=>`${f.q} :: ${f.a}`).join('\n') : '';
+  document.getElementById('conv-boost-collapse').classList.remove('open');
   document.getElementById('product-form-section').style.display = 'block';
   document.getElementById('product-form-section').scrollIntoView({behavior:'smooth'});
 }
 function clearForm() {
-  ['f-id','f-name','f-tag','f-desc','f-short-desc','f-features','f-badge','f-drive','f-demo','f-external','f-banner','f-cats'].forEach(id=>document.getElementById(id).value='');
+  ['f-id','f-name','f-tag','f-desc','f-short-desc','f-features','f-badge','f-drive','f-demo','f-external','f-banner','f-cats',
+   'f-rating','f-rating-count','f-sale-ends','f-test-name','f-test-exam','f-test-stars','f-test-text','f-faq'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('f-icon').value='📄';
   document.getElementById('f-price').value='29';
   document.getElementById('f-orig').value='69';
@@ -1263,6 +1578,7 @@ function clearForm() {
   const tog = document.getElementById('toggle-featured');
   tog.classList.remove('on');
   document.getElementById('toggle-featured-label').textContent='No';
+  document.getElementById('conv-boost-collapse').classList.remove('open');
 }
 function cancelForm() {
   document.getElementById('product-form-section').style.display='none';
@@ -1273,11 +1589,25 @@ function toggleFeature(id) {
   el.classList.toggle('on');
   document.getElementById(id+'-label').textContent = el.classList.contains('on')?'Yes':'No';
 }
-function saveProduct() {
+async function saveProduct() {
   const id   = document.getElementById('f-id').value.trim().replace(/\s/g,'-').toLowerCase();
   const name = document.getElementById('f-name').value.trim();
-  if (!id||!name) { showToast('ID and Name are required'); return; }
+  if (!id||!name) { showToast('ID and Name are required', 'error'); return; }
   const cats = document.getElementById('f-cats').value.split(',').map(s=>s.trim()).filter(Boolean);
+
+  const ratingVal = parseFloat(document.getElementById('f-rating').value);
+  const ratingCountVal = document.getElementById('f-rating-count').value.trim();
+  const saleEndsVal = document.getElementById('f-sale-ends').value;
+  const testName = document.getElementById('f-test-name').value.trim();
+  const testExam = document.getElementById('f-test-exam').value.trim();
+  const testStars = parseInt(document.getElementById('f-test-stars').value);
+  const testText = document.getElementById('f-test-text').value.trim();
+  const faqRaw = document.getElementById('f-faq').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  const faqParsed = faqRaw.map(line => {
+    const parts = line.split('::');
+    return { q: (parts[0]||'').trim(), a: (parts.slice(1).join('::')||'').trim() };
+  }).filter(f => f.q && f.a);
+
   const product = {
     id, name,
     icon        : document.getElementById('f-icon').value||'📄',
@@ -1298,25 +1628,35 @@ function saveProduct() {
     bannerUrl   : document.getElementById('f-banner').value||null,
     categories  : cats.length?cats:['home'],
     featured    : document.getElementById('toggle-featured').classList.contains('on'),
+    rating      : ratingVal || null,
+    ratingCount : ratingCountVal || null,
+    saleEndsAt  : saleEndsVal ? new Date(saleEndsVal).toISOString() : null,
+    testimonial : (testName && testText) ? {name:testName, exam:testExam, stars:testStars||5, text:testText} : null,
+    faq         : faqParsed.length ? faqParsed : null,
   };
   if (editingId) {
     const idx = allProducts.findIndex(p=>p.id===editingId);
     if (idx>-1) allProducts[idx]=product; else allProducts.push(product);
   } else {
-    if (allProducts.find(p=>p.id===id)) { showToast('Product ID already exists'); return; }
+    if (allProducts.find(p=>p.id===id)) { showToast('Product ID already exists', 'error'); return; }
     allProducts.push(product);
   }
   renderAdminProductList();
-  cancelForm();
-  pushToGitHub();
+  renderAdminStats();
+  markDirty();
+  const ok = await pushToGitHub();
+  if (ok) cancelForm();
+  // if push failed, keep the form open exactly as-is so nothing typed is lost — just click save again to retry
 }
-function deleteProduct() {
+async function deleteProduct() {
   if (!editingId) return;
   if (!confirm('Delete this product? Cannot be undone.')) return;
   allProducts = allProducts.filter(p=>p.id!==editingId);
   renderAdminProductList();
-  cancelForm();
-  pushToGitHub();
+  renderAdminStats();
+  markDirty();
+  const ok = await pushToGitHub();
+  if (ok) cancelForm();
 }
 
 // ── GITHUB API ───────────────────────────────────────────────
@@ -1326,29 +1666,54 @@ async function getFileSHA(token, repo, path, branch) {
   if (r.status===404) return null;
   return (await r.json()).sha || null;
 }
-async function pushToGitHub() {
+function saveGhConfig() {
+  try {
+    localStorage.setItem('t1st_gh_config', JSON.stringify({
+      repo  : document.getElementById('gh-repo').value.trim(),
+      path  : document.getElementById('gh-path').value.trim(),
+      branch: document.getElementById('gh-branch').value.trim(),
+      token : document.getElementById('gh-token').value.trim()
+    }));
+  } catch(e) {}
+}
+function loadGhConfig() {
+  try {
+    const raw = localStorage.getItem('t1st_gh_config');
+    if (!raw) return;
+    const c = JSON.parse(raw);
+    if (c.repo)   document.getElementById('gh-repo').value = c.repo;
+    if (c.path)   document.getElementById('gh-path').value = c.path;
+    if (c.branch) document.getElementById('gh-branch').value = c.branch;
+    if (c.token)  document.getElementById('gh-token').value = c.token;
+  } catch(e) {}
+}
+let _pushInFlight = false;
+async function pushToGitHub(_retrying) {
   const token  = document.getElementById('gh-token').value.trim();
   const repo   = document.getElementById('gh-repo').value.trim();
   const path   = document.getElementById('gh-path').value.trim();
-  const branch = document.getElementById('gh-branch').value.trim();
-  if (!token) { showToast('Enter GitHub token first'); return; }
-  showToast('Pushing to GitHub...');
+  const branch = document.getElementById('gh-branch').value.trim() || 'main';
+  if (!token) { showToast('Enter your GitHub token first (GitHub Config section)', 'error'); return false; }
+  if (!repo || !path) { showToast('Repo and file path are required in GitHub Config', 'error'); return false; }
+  saveGhConfig();
+  if (_pushInFlight && !_retrying) { showToast('A push is already in progress — wait for it to finish', 'info'); return false; }
+  _pushInFlight = true;
+  if (!_retrying) showToast('Pushing to GitHub...', 'info');
   try {
-    // Always fetch fresh SHA to avoid mismatch errors
     const metaRes = await fetch(
       `https://api.github.com/repos/${repo}/contents/${path}?ref=${branch}&t=${Date.now()}`,
       {headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}}
     );
     let sha = null;
     if (metaRes.ok) {
-      const meta = await metaRes.json();
-      sha = meta.sha || null;
+      sha = (await metaRes.json()).sha || null;
     } else if (metaRes.status !== 404) {
-      const e = await metaRes.json();
-      showToast('SHA fetch failed: ' + (e.message || metaRes.status));
-      return;
+      const e = await metaRes.json().catch(()=>({}));
+      showToast('GitHub error while checking file: ' + (e.message || metaRes.status), 'error');
+      _pushInFlight = false;
+      return false;
     }
-    const payload = {products: allProducts, categories: allCategories};
+    const payload = {products: allProducts, categories: allCategories, settings: siteSettings};
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
     const body    = {message:'Update via Target1st admin', content, branch};
     if (sha) body.sha = sha;
@@ -1357,9 +1722,26 @@ async function pushToGitHub() {
       headers : {'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
       body    : JSON.stringify(body)
     });
-    if (r.ok) showToast('Pushed! Site updates in ~2 min.');
-    else { const e=await r.json(); showToast('Error: '+(e.message||r.status)); }
-  } catch(e) { showToast('Push failed: '+e.message); }
+    if (r.ok) {
+      showToast('✅ Pushed! Site updates in ~2 min.', 'success');
+      clearAdminDraft();
+      _pushInFlight = false;
+      return true;
+    }
+    const e = await r.json().catch(()=>({}));
+    // File changed on GitHub between our SHA read and write — retry once with a fresh SHA
+    if (r.status === 409 && !_retrying) {
+      _pushInFlight = false;
+      return await pushToGitHub(true);
+    }
+    showToast('❌ GitHub push failed: ' + (e.message || r.status) + ' — your changes are safe, click Push again to retry.', 'error');
+    _pushInFlight = false;
+    return false;
+  } catch(e) {
+    showToast('❌ Push failed: ' + e.message + ' — your changes are kept locally, retry when online.', 'error');
+    _pushInFlight = false;
+    return false;
+  }
 }
 async function testGitHub() {
   const token=document.getElementById('gh-token').value.trim();
@@ -1372,8 +1754,52 @@ async function testGitHub() {
   try {
     await getFileSHA(token,repo,path,branch);
     s.textContent='✅ Connected successfully'; s.className='gh-status gh-ok';
+    saveGhConfig();
   } catch(e) { s.textContent='❌ '+e.message; s.className='gh-status gh-err'; }
 }
+
+// ── ADMIN: DRAFT PERSISTENCE (survives accidental refresh) ────
+let _isDirty = false;
+function markDirty() {
+  _isDirty = true;
+  saveAdminDraft();
+}
+function saveAdminDraft() {
+  try {
+    localStorage.setItem('t1st_admin_draft', JSON.stringify({
+      products: allProducts, categories: allCategories, settings: siteSettings, ts: Date.now()
+    }));
+  } catch(e) {}
+}
+function clearAdminDraft() {
+  try { localStorage.removeItem('t1st_admin_draft'); } catch(e) {}
+  _isDirty = false;
+}
+function checkAdminDraft() {
+  try {
+    const raw = localStorage.getItem('t1st_admin_draft');
+    if (!raw) return;
+    const draft = JSON.parse(raw);
+    if (!draft || !draft.ts) return;
+    if (Date.now() - draft.ts > 24*3600*1000) { localStorage.removeItem('t1st_admin_draft'); return; }
+    if (confirm('Unsaved changes were found from your last admin session (not yet pushed to GitHub). Restore them?')) {
+      if (draft.products) allProducts = draft.products;
+      if (draft.categories) allCategories = draft.categories;
+      if (draft.settings) siteSettings = Object.assign({}, siteSettings, draft.settings);
+      _isDirty = true;
+      renderAdminProductList();
+      renderAdminCatList();
+      renderAdminSiteSettingsForm();
+      renderAdminStats();
+      showToast('Draft restored — click Push to GitHub to save it for real', 'info');
+    } else {
+      localStorage.removeItem('t1st_admin_draft');
+    }
+  } catch(e) {}
+}
+window.addEventListener('beforeunload', function(e) {
+  if (_isDirty) { e.preventDefault(); e.returnValue = ''; }
+});
 
 // ── CART ─────────────────────────────────────────────────────
 let cart = JSON.parse(localStorage.getItem('t1st_cart') || '[]');
@@ -1697,24 +2123,168 @@ function openProductDetail(id) {
   addToRecentlyViewed(id);
   _openProductDetailCore(p);
 }
+let _selectedProductIds = new Set();
 function renderAdminProductList() {
   const el = document.getElementById('admin-product-list');
   if (!el) return;
-  if (!allProducts.length) { el.innerHTML=`<p style="font-size:.82rem;color:var(--muted);">No products yet.</p>`; return; }
+  // Drop selections for products that no longer exist
+  const validIds = new Set(allProducts.map(p=>p.id));
+  _selectedProductIds.forEach(id => { if (!validIds.has(id)) _selectedProductIds.delete(id); });
+  if (!allProducts.length) { el.innerHTML=`<p style="font-size:.82rem;color:var(--muted);">No products yet.</p>`; updateBulkDeleteBtn(); return; }
   el.innerHTML = allProducts.map((p,i) => {
     const sc = p.status==='live'?'pli-live':p.status==='free'?'pli-free':'pli-soon';
     const sl = p.status==='coming_soon'?'Soon':p.status.charAt(0).toUpperCase()+p.status.slice(1);
+    const thumb = p.bannerUrl ? `<img src="${p.bannerUrl}" class="pli-thumb" alt="">` : `<span style="font-size:1.3rem;width:38px;text-align:center;">${p.icon||'📄'}</span>`;
+    const checked = _selectedProductIds.has(p.id) ? 'checked' : '';
     return `<div class="product-list-item">
-      <span>${p.icon||'📄'}</span>
+      <input type="checkbox" class="pli-checkbox" ${checked} onchange="toggleSelectProduct('${p.id}',this.checked)">
+      <span class="pli-rank">#${i+1}</span>
+      ${thumb}
       <span class="pli-name">${p.name}</span>
       <span class="pli-status ${sc}">${sl}</span>
       <div class="pli-actions">
+        <button class="pli-move-btn" ${i===0?'disabled':''} onclick="moveProduct(${i},-1)" title="Move up">▲</button>
+        <button class="pli-move-btn" ${i===allProducts.length-1?'disabled':''} onclick="moveProduct(${i},1)" title="Move down">▼</button>
         <button class="admin-btn admin-btn-ghost" style="padding:5px 12px;font-size:.75rem;" onclick="editProduct(${i})">Edit</button>
       </div>
     </div>`;
   }).join('');
+  updateBulkDeleteBtn();
   renderReviewsAdmin();
   renderDiscountRulesAdmin();
+}
+function moveProduct(idx, dir) {
+  const newIdx = idx + dir;
+  if (newIdx < 0 || newIdx >= allProducts.length) return;
+  [allProducts[idx], allProducts[newIdx]] = [allProducts[newIdx], allProducts[idx]];
+  renderAdminProductList();
+  markDirty();
+  showToast('Reordered — push to GitHub to save', 'info');
+}
+function toggleSelectProduct(id, checked) {
+  if (checked) _selectedProductIds.add(id); else _selectedProductIds.delete(id);
+  const allBox = document.getElementById('pli-select-all');
+  if (allBox) allBox.checked = allProducts.length > 0 && _selectedProductIds.size === allProducts.length;
+  updateBulkDeleteBtn();
+}
+function toggleSelectAllProducts(checked) {
+  _selectedProductIds = checked ? new Set(allProducts.map(p=>p.id)) : new Set();
+  renderAdminProductList();
+}
+function updateBulkDeleteBtn() {
+  const btn = document.getElementById('bulk-delete-btn');
+  if (!btn) return;
+  const n = _selectedProductIds.size;
+  btn.textContent = `🗑️ Delete Selected (${n})`;
+  btn.disabled = n === 0;
+}
+async function deleteSelectedProducts() {
+  const n = _selectedProductIds.size;
+  if (!n) return;
+  if (!confirm(`Delete ${n} selected product${n>1?'s':''}? This can't be undone.`)) return;
+  allProducts = allProducts.filter(p => !_selectedProductIds.has(p.id));
+  _selectedProductIds = new Set();
+  renderAdminProductList();
+  renderAdminStats();
+  markDirty();
+  await pushToGitHub();
+}
+
+// ── ADMIN: STATS ─────────────────────────────────────────────
+function renderAdminStats() {
+  const el = document.getElementById('admin-stats-row');
+  if (!el) return;
+  const total = allProducts.length;
+  const live = allProducts.filter(p=>p.status==='live').length;
+  const free = allProducts.filter(p=>p.status==='free').length;
+  const soon = allProducts.filter(p=>p.status==='coming_soon').length;
+  const cards = [
+    {n: total, l: 'Total Products'},
+    {n: live,  l: 'Live'},
+    {n: free,  l: 'Free'},
+    {n: soon,  l: 'Coming Soon'},
+  ];
+  el.innerHTML = cards.map(c => `<div class="admin-stat-card"><div class="admin-stat-n">${c.n}</div><div class="admin-stat-l">${c.l}</div></div>`).join('');
+}
+
+// ── ADMIN: SITE-WIDE CONVERSION / TRUST SETTINGS ──────────────
+function renderAdminSiteSettingsForm() {
+  const r = document.getElementById('ss-rating');
+  const rc = document.getElementById('ss-rating-count');
+  if (r) r.value = siteSettings.defaultRating;
+  if (rc) rc.value = siteSettings.defaultRatingCount;
+  renderTrustChipsAdmin();
+  renderGuaranteeAdmin();
+  renderDefaultFaqAdmin();
+}
+function saveSiteSettingsFromForm() {
+  const r = parseFloat(document.getElementById('ss-rating').value);
+  const rc = document.getElementById('ss-rating-count').value.trim();
+  if (r) siteSettings.defaultRating = r;
+  if (rc) siteSettings.defaultRatingCount = rc;
+  markDirty();
+}
+function renderTrustChipsAdmin() {
+  const el = document.getElementById('trust-chips-list');
+  if (!el) return;
+  el.innerHTML = siteSettings.trustChips.map((c,i) => `
+    <div class="dyn-row">
+      <input class="dyn-icon" type="text" maxlength="4" value="${(c.icon||'').replace(/"/g,'&quot;')}" onchange="siteSettings.trustChips[${i}].icon=this.value;markDirty();">
+      <input class="dyn-text" type="text" value="${(c.text||'').replace(/"/g,'&quot;')}" onchange="siteSettings.trustChips[${i}].text=this.value;markDirty();">
+      <button class="dyn-remove" onclick="removeTrustChip(${i})">✕</button>
+    </div>`).join('') || '<p style="font-size:.8rem;color:var(--muted);">No chips yet.</p>';
+}
+function addTrustChip() {
+  siteSettings.trustChips.push({icon:'⭐', text:'New trust point'});
+  renderTrustChipsAdmin();
+  markDirty();
+}
+function removeTrustChip(i) {
+  siteSettings.trustChips.splice(i,1);
+  renderTrustChipsAdmin();
+  markDirty();
+}
+function renderGuaranteeAdmin() {
+  const el = document.getElementById('guarantee-items-list');
+  if (!el) return;
+  el.innerHTML = siteSettings.guaranteeItems.map((g,i) => `
+    <div class="dyn-row">
+      <input class="dyn-icon" type="text" maxlength="4" value="${(g.icon||'').replace(/"/g,'&quot;')}" onchange="siteSettings.guaranteeItems[${i}].icon=this.value;markDirty();">
+      <input class="dyn-text" type="text" value="${(g.text||'').replace(/"/g,'&quot;')}" onchange="siteSettings.guaranteeItems[${i}].text=this.value;markDirty();">
+      <button class="dyn-remove" onclick="removeGuaranteeItem(${i})">✕</button>
+    </div>`).join('') || '<p style="font-size:.8rem;color:var(--muted);">No items yet.</p>';
+}
+function addGuaranteeItem() {
+  siteSettings.guaranteeItems.push({icon:'⭐', text:'New guarantee'});
+  renderGuaranteeAdmin();
+  markDirty();
+}
+function removeGuaranteeItem(i) {
+  siteSettings.guaranteeItems.splice(i,1);
+  renderGuaranteeAdmin();
+  markDirty();
+}
+function renderDefaultFaqAdmin() {
+  const el = document.getElementById('default-faq-list');
+  if (!el) return;
+  el.innerHTML = siteSettings.defaultFaq.map((f,i) => `
+    <div class="dyn-row dyn-faq-row">
+      <div class="dyn-faq-top">
+        <input class="dyn-text" style="flex:1;" type="text" placeholder="Question" value="${(f.q||'').replace(/"/g,'&quot;')}" onchange="siteSettings.defaultFaq[${i}].q=this.value;markDirty();">
+        <button class="dyn-remove" onclick="removeDefaultFaq(${i})">✕</button>
+      </div>
+      <textarea rows="2" placeholder="Answer" onchange="siteSettings.defaultFaq[${i}].a=this.value;markDirty();">${f.a||''}</textarea>
+    </div>`).join('') || '<p style="font-size:.8rem;color:var(--muted);">No FAQ yet.</p>';
+}
+function addDefaultFaq() {
+  siteSettings.defaultFaq.push({q:'New question?', a:'Answer here.'});
+  renderDefaultFaqAdmin();
+  markDirty();
+}
+function removeDefaultFaq(i) {
+  siteSettings.defaultFaq.splice(i,1);
+  renderDefaultFaqAdmin();
+  markDirty();
 }
 
 // ── INIT ─────────────────────────────────────────────────────
